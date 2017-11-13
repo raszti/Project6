@@ -23,15 +23,15 @@ There is a board of 6x5 fields.
 
 ### The rules
 Player starts from the green area, and have to cross the road avoiding the enemy objects crossing the road.
-When the player succesfully crossed the roads and reached the water area one point is earned and the player
+When the player successfully crossed the roads and reached the water area one point is earned and the player
 restarts from the green field. The player has 3 lives. Every time a bug touches the player it loses a life
 and it has to go back to the green field and try again.
 
 ### The moves
-The player can controll the game with the arrow buttons of the keyboard.
+The player can control the game with the arrow buttons of the keyboard.
 
 ### The points
-The player earns point for succesful crossing. The current collected points can be monitored on the right top
+The player earns point for successful crossing. The current collected points can be monitored on the right top
 corner of the canvas.
 
 ### The hearts
@@ -40,7 +40,7 @@ The lives of the player are visible in the top left corner of the canvas.
 ### Pause function
 When the player clicks on the canvas the game will be paused, and it can be continued after another click.
 
-## The JavaScript files used to make the applcation work
+## The JavaScript files used to make the application work
 --------------------------------------------------------
 ### app.js
 Responsible for creating enemy object, player object and the game object.
@@ -53,9 +53,10 @@ It eases the process of loading image files so that they can be used in the game
 
 ## The application uses the following external libraries and frameworks
 -----------------------------------------------------------------------
-[jQuery 3.2.1 JavaScript library](https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js)
-[Special fonts used]("https://fonts.googleapis.com/css?family=Indie+Flower")
-[The starter code provided by UDACITY (Richard Kalehoff)](https://github.com/udacity/frontend-nanodegree-arcade-game)
+
+- [jQuery 3.2.1 JavaScript library](https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js)
+- [Special fonts used](https://fonts.googleapis.com/css?family=Indie+Flower)
+- [The starter code provided by UDACITY (Richard Kalehoff)](https://github.com/udacity/frontend-nanodegree-arcade-game)
 
 # How to contribute
 
