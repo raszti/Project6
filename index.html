@@ -2,12 +2,61 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Effective JavaScript: Frogger</title>
+    <meta name="description" content="DeBugger Game Application">
+    <title>Effective JavaScript: DeBugger</title>
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+
+    <div class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1>Game over</h1>
+        </div>
+        <div class="modal-body">
+          <p class="score-result">You made xx points.</p>
+          <button class="play-again-btn">Play Again</button>
+        </div>
+      </div>
+
+    </div>
+    <h1>DeBugger</h1>
+    <div class = "canvas-container">
+      <div class = "score-panel">
+        <ul class = "lives">
+          <li class = "heart">&#9829;</li>
+          <li class = "heart">&#9829;</li>
+          <li class = "heart">&#9829;</li>
+        </ul>
+        <p class="score">Points: 0</p>
+      </div>
+    </div>
+    <div class = "players">
+      <ul class = "players-options">
+        <li class = "player-select">
+          <img src="images/char-boy.png" alt="boy">
+          <p class = "character-name">Easy Boy</p>
+        </li>
+        <li class = "player-select">
+          <img src="images/char-cat-girl.png" alt="cat_girl">
+          <p class = "character-name">Cat Girl</p>
+        </li>
+        <li class = "player-select">
+          <img src="images/char-pink-girl.png" alt="pink_girl">
+          <p class = "character-name">Pink Girl</p>
+        </li>
+        <li class = "player-select">
+          <img src="images/char-princess-girl.png" alt="princess_girl">
+          <p class = "character-name">Queen Girl</p>
+        </li>
+      </ul>
+    </div>
+
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+
 </body>
 </html>

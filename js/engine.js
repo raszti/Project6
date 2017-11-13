@@ -6,10 +6,10 @@
  * A game engine works by drawing the entire game screen over and over, kind of
  * like a flipbook you may have created as a kid. When your player moves across
  * the screen, it may look like just that image/character is moving or being
- * drawn but that is not the case. What's really happening is the entire "scene"
+ * drawn but that is not the case. What's really happening is the entire 'scene'
  * is being drawn over and over, presenting the illusion of animation.
  *
- * This engine makes the canvas' context (ctx) object globally available to make 
+ * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
 
@@ -20,13 +20,24 @@ var Engine = (function(global) {
      */
     var doc = global.document,
         win = global.window,
-        canvas = doc.createElement('canvas'),
-        ctx = canvas.getContext('2d'),
+        canvas = doc.createElement("canvas"),
+        ctx = canvas.getContext("2d"),
         lastTime;
+    let squareWidth = 101;
 
     canvas.width = 505;
     canvas.height = 606;
-    doc.body.appendChild(canvas);
+    $(".canvas-container").append(canvas);
+
+    // Added onclick methods
+    $(".play-again-btn").on("click", reset);
+    $("canvas").on("click", function(){
+       if (game.paused) {
+         game.paused = false;
+       } else {
+         game.paused = true;
+       }
+    });
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -44,8 +55,10 @@ var Engine = (function(global) {
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
-        update(dt);
-        render();
+        if (!game.paused) {
+          update(dt);
+          render();
+        }
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -79,7 +92,17 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+
+        // Checking collision with every enemy object
+        allEnemies.forEach(function(enemy){
+          if (enemy.y == player.y
+              && enemy.x * squareWidth > player.x * squareWidth - 65
+              && enemy.x * squareWidth < player.x * squareWidth + 60) {
+              player.x = 2;
+              player.y = 5;
+              player.lifeLost();
+            }
+          });
     }
 
     /* This is called by the update function and loops through all of the
@@ -107,12 +130,12 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                "images/water-block.png",   // Top row is water
+                "images/stone-block.png",   // Row 1 of 3 of stone
+                "images/stone-block.png",   // Row 2 of 3 of stone
+                "images/stone-block.png",   // Row 3 of 3 of stone
+                "images/grass-block.png",   // Row 1 of 2 of grass
+                "images/grass-block.png"    // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
@@ -153,12 +176,15 @@ var Engine = (function(global) {
         player.render();
     }
 
-    /* This function does nothing but it could have been a good place to
-     * handle game reset states - maybe a new game menu or a game over screen
-     * those sorts of things. It's only called once by the init() method.
+    /* This function reset the current play and starts a newone,
+     * with setting the original parameters back.
      */
     function reset() {
-        // noop
+        player = new Player();
+        $(".score").replaceWith(`<p class="score">Points: ${player.points}</p>`);
+        $(".heart-lost").addClass("heart").removeClass("heart-lost");
+        $(".modal").css("display", "none");
+        game = new Game();
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -166,11 +192,14 @@ var Engine = (function(global) {
      * all of these images are properly loaded our game will start.
      */
     Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/char-boy.png'
+        "images/stone-block.png",
+        "images/water-block.png",
+        "images/grass-block.png",
+        "images/enemy-bug.png",
+        "images/char-boy.png",
+        "images/char-cat-girl.png",
+        "images/char-pink-girl.png",
+        "images/char-princess-girl.png",
     ]);
     Resources.onReady(init);
 
@@ -179,4 +208,5 @@ var Engine = (function(global) {
      * from within their app.js files.
      */
     global.ctx = ctx;
+
 })(this);
